@@ -43,6 +43,11 @@ int main()
 }
 ```
 
+#### Remarks
+
+- The default argument `void` in the primary template (*) must be the exact same type as the argument in 
+the specialization (**).
+
 ### Detect member function
 
 ```c++
@@ -69,6 +74,12 @@ int main()
     std::cout << "(2) " << has_data<int>::value << "\n";
 }
 ```
+
+
+#### Remarks
+
+- [std::declval](https://en.cppreference.com/w/cpp/utility/declval) forms expression to be detected, 
+[decltype](https://en.cppreference.com/w/cpp/language/decltype) inspects expression in unevaluated context.
 
 ## Reference
 
