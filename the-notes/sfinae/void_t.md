@@ -16,7 +16,7 @@ template<typename... Ts> using void_t = typename make_void<Ts...>::type;
 
 ## Examples
 
-### Detect ill-formed types 
+### Detect member type
 
 ```c++
 #include <type_traits>
@@ -42,6 +42,35 @@ int main()
     std::cout << "(2) " << has_value_type<int>::value << "\n";
 }
 ```
+
+### Detect member function
+
+```c++
+#include <type_traits>
+#include <vector>
+#include <iostream>
+
+// primary template
+template<class, class = std::void_t<>> 
+struct has_data 
+    : std::false_type{}; // (*)
+
+// specialized as has_data<T, void> or discarded (SFINAE)
+template< class T >
+struct has_data<T, std::void_t<decltype(std::declval<T&>.data())>> 
+    : std::true_type{ }; // (**)
+
+int main()
+{
+    // data() exists, specialization is well-formed, specialization will be selected     
+    std::cout << "(1) " << has_data<std::vector<int>>::value << "\n";
+
+    // specialization is nonviable (SFINAE), primary template will be selected
+    std::cout << "(2) " << has_data<int>::value << "\n";
+}
+```
+
+
 
 #### Remarks
 
