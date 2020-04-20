@@ -35,7 +35,10 @@ struct has_value_type<T, std::void_t<typename T::value_type>>
 
 int main()
 {
+    // value_type exists, specialization is well-formed, specialization will be selected     
     std::cout << "(1) " << has_value_type<std::vector<int>>::value << "\n";
+
+    // specialization is nonviable (SFINAE), primary template will be selected
     std::cout << "(2) " << has_value_type<int>::value << "\n";
 }
 ```
