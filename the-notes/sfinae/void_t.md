@@ -1,6 +1,4 @@
-# SFINAE
-
-## void_t
+# void_t
 
 ```c++
 template< class... >
