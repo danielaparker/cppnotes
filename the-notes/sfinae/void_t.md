@@ -70,13 +70,6 @@ int main()
 }
 ```
 
-
-
-#### Remarks
-
-- The default argument `void` in the primary template (*) must be the exact same type as the argument in 
-the specialization (**).
-
 ## Reference
 
 [cppreference](https://en.cppreference.com/w/cpp/types/void_t)
