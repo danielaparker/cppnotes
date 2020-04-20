@@ -45,7 +45,8 @@ int main()
 
 #### Remarks
 
-- The default argument `void` in (*) must be the exact same type as the argument in (**).
+- The default argument `void` in the primary template (*) must be the exact same type as the argument in 
+the specialization (**).
 
 ## Reference
 

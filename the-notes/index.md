@@ -1,2 +1,5 @@
+# SFINAE
 
-[Detection Idiom](sfinae/detection-idiom.md)
+## Detection Idiom
+
+[Detection Idiom](sfinae/void_t.md)
