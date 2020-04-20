@@ -7,7 +7,14 @@ template< class... >
 using void_t = void;
 ```
 
-Maps a sequence of any types to type void
+Maps a sequence of types to type void
+
+## Implementation (until C++17)
+
+```c++
+template<typename... Ts> struct make_void { typedef void type;};
+template<typename... Ts> using void_t = typename make_void<Ts...>::type;
+```
 
 ## Examples
 

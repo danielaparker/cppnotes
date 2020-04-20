@@ -1,0 +1,14 @@
+**/.vs
+*.sln
+*.suo
+*.sdf
+*.VC.opendb
+*.VC.db
+*.vcxproj.user
+*.vcxproj.filters
+**/x64/Debug/
+**/x64/Release/
+**/Debug/
+**/Release/
+**/*.vcxproj
+
