@@ -24,12 +24,14 @@ template<typename... Ts> using void_t = typename make_void<Ts...>::type;
 #include <iostream>
 
 // primary template
-template<class, class = std::void_t<>> // equiv to template<class, class = void>
-struct has_value_type : std::false_type{};
+template<class, class = std::void_t<>> // or template<class, class = void>
+struct has_value_type 
+    : std::false_type{}; // (*)
 
-// specialization
+// specialized as has_value_type<T, void> or discarded (SFINAE)
 template< class T >
-struct has_value_type<T, std::void_t<typename T::value_type>> : std::true_type{ };
+struct has_value_type<T, std::void_t<typename T::value_type>> 
+    : std::true_type{ }; // (**)
 
 int main()
 {
@@ -38,8 +40,12 @@ int main()
 }
 ```
 
+#### Remarks
+
+- The default argument `void` in (*) has to be the exact same type as the argument in (**).
+
 ## Reference
 
 [cppreference](https://en.cppreference.com/w/cpp/types/void_t)
 
-
+[Proposing Standard Library Support for the C++ Detection Idiom](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2015/n4436.pdf)

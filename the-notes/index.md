@@ -1,1 +1,2 @@
-[sfinae](sfinae/void_t.md)
+
+[Detection Idiom](sfinae/detection-idiom.md)
