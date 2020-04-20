@@ -42,7 +42,7 @@ int main()
 
 #### Remarks
 
-- The default argument `void` in (*) has to be the exact same type as the argument in (**).
+- The default argument `void` in (*) must be the exact same type as the argument in (**).
 
 ## Reference
 
