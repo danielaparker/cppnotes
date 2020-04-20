@@ -33,7 +33,7 @@ int main()
 }
 ```
 
-## Reference:
+## Reference
 
 [cppreference](https://en.cppreference.com/w/cpp/types/void_t)
 
