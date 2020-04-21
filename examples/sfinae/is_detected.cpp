@@ -4,42 +4,25 @@
 #include <utility> // std::declval
 #include "nonstd.hpp"
 
-// primary template handles all types not supporting the archetypal Op
-template< class Default
-, class // always void; supplied externally
-, template<class...> class Op
-, class... Args
->
-struct
-detector
-{
- constexpr static auto value = false;
- using type = Default;
- };
- // specialization recognizes and handles only types supporting Op
- template< class Default
- , template<class...> class Op
- , class... Args
- >
- struct
- detector<Default, nonstd::void_t<Op<Args...>>, Op, Args...>
- {
- constexpr static auto value = true;
- using type = Op<Args...>;
- };
-
-template< template<class...> class Op, class... Args >
+// archetypal expression for conversion operation
+template< class L, class R >
 using
-is_detected = detector<void, void, Op, Args...>;
+assign_t = decltype(std::declval<L>() = std::declval<R>());
 
-template< template<class...> class Op, class... Args >
+// trait corresponding to that archetype
+template< class L, class R >
+using
+is_assignable = nonstd::is_detected<assign_t, L, R>;
+
+template< class L, class R >
 constexpr bool
-is_detected_v = is_detected<Op, Args...>::value;
-
-template< template<class...> class Op, class... Args >
- using
- is_detected_t = typename is_detected<Op, Args...>::type;
+is_assignable_v = nonstd::is_detected_v<assign_t, L, R>;
 
 int main()
 {
+    std::cout << "(1) " << is_assignable<int&,int>::value << "\n";
+    std::cout << "(2) " << is_assignable<int,int>::value << "\n";
+
+    std::cout << "(3) " << is_assignable_v<int&, int> << "\n";
+    std::cout << "(4) " << is_assignable_v<int, int> << "\n";
 }
