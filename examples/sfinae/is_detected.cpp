@@ -30,11 +30,11 @@ has_data_exact_v = nonstd::is_detected_exact_v<Ret, container_data_t, Container>
 
 int main()
 {
-    std::cout << "(1) " << has_data_v<std::vector<int>> << "\n";
+    std::cout << "(1) " << has_data<std::vector<int>>::value << "\n";
 
-    std::cout << "(2) " << has_data_exact<int*,std::vector<int>>::value << "\n";
+    std::cout << "(2) " << has_data_exact_v<int*,std::vector<int>> << "\n";
 
-    std::cout << "(3) " << has_data_exact<char*, std::vector<int>>::value << "\n";
+    std::cout << "(3) " << has_data_exact_v<int*, const std::vector<int>&> << "\n";
 
     std::cout << "(4) " << has_data_exact_v<int*,std::vector<int>> << "\n";
 }
