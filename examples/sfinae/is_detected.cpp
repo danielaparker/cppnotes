@@ -4,25 +4,37 @@
 #include <utility> // std::declval
 #include "nonstd.hpp"
 
+
 // archetypal expression for conversion operation
-template< class L, class R >
+template<typename Container>
 using
-assign_t = decltype(std::declval<L>() = std::declval<R>());
+container_data_t = decltype(std::declval<Container>().data());
 
-// trait corresponding to that archetype
-template< class L, class R >
+// has_data
+template<class Container>
 using
-is_assignable = nonstd::is_detected<assign_t, L, R>;
+has_data = nonstd::is_detected<container_data_t,Container>;
 
-template< class L, class R >
+template<class Container>
 constexpr bool
-is_assignable_v = nonstd::is_detected_v<assign_t, L, R>;
+has_data_v = nonstd::is_detected_v<container_data_t, Container>;
+
+// has_data_exact
+template< class Ret,class Container>
+using
+has_data_exact = nonstd::is_detected_exact<Ret,container_data_t,Container>;
+
+template< class Ret, class Container >
+constexpr bool
+has_data_exact_v = nonstd::is_detected_exact_v<Ret, container_data_t, Container>;
 
 int main()
 {
-    std::cout << "(1) " << is_assignable<int&,int>::value << "\n";
-    std::cout << "(2) " << is_assignable<int,int>::value << "\n";
+    std::cout << "(1) " << has_data_v<std::vector<int>> << "\n";
 
-    std::cout << "(3) " << is_assignable_v<int&, int> << "\n";
-    std::cout << "(4) " << is_assignable_v<int, int> << "\n";
+    std::cout << "(2) " << has_data_exact<int*,std::vector<int>>::value << "\n";
+
+    std::cout << "(3) " << has_data_exact<char*, std::vector<int>>::value << "\n";
+
+    std::cout << "(4) " << has_data_exact_v<int*,std::vector<int>> << "\n";
 }
